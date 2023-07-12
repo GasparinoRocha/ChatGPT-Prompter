@@ -11,6 +11,6 @@ MODEL=gpt-3.5-turbo
 TEMPERATURE=0.6
 ```
 - Write your prompt to the [promt.txt](prompt.txt) file
-- Run `pip install -r`
+- Run `pip install -r requirements.txt`
 - Run `python .\main.py`
 - Check the [responses](responses) folder for the most recent response
