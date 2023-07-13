@@ -19,13 +19,11 @@ def get_completion(prompt):
 
     return response.choices[0].message["content"]
 
-def load_csv_file(filename):
+def query_prompts(filename):
     df = pandas.read_csv(filename)
-    print(df)
 
     df['Response'] = df.apply(lambda row : get_completion(row["Prompt"]), axis = 1)
-    print(df)
 
     df.to_csv(filename, index=False)
 
-load_csv_file("prompts.csv")
+query_prompts("prompts.csv")
