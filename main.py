@@ -1,7 +1,7 @@
 import openai
 from os import getenv
 from dotenv.main import load_dotenv
-import datetime
+import pandas
 
 load_dotenv()
 
@@ -19,14 +19,13 @@ def get_completion(prompt):
 
     return response.choices[0].message["content"]
 
-f = open("prompt.txt", "r")
-prompt = f.read()
-f.close()
+def load_csv_file(filename):
+    df = pandas.read_csv(filename)
+    print(df)
 
-response = get_completion(prompt)
+    df['Response'] = df.apply(lambda row : get_completion(row["Prompt"]), axis = 1)
+    print(df)
 
-date = datetime.datetime.now().strftime('%Y_%m_%d-%I_%M_%S_%p')
+    df.to_csv(filename, index=False)
 
-f = open(f"responses/{date}.txt", "w")
-f.write(response)
-f.close()
+load_csv_file("prompts.csv")

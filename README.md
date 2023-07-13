@@ -10,7 +10,7 @@ OPENAI_KEY=<YOUR OPENAI API KEY>
 MODEL=gpt-3.5-turbo
 TEMPERATURE=0.6
 ```
-- Write your prompt to the [promt.txt](prompt.txt) file
+- Add your prompts to the [prompts.csv](prompts.csv) file
 - Run `pip install -r requirements.txt`
 - Run `python .\main.py`
-- Check the [responses](responses) folder for the most recent response
+- The [prompts.csv](prompts.csv) file will have been filled in with the responses
