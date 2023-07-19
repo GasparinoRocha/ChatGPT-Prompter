@@ -13,4 +13,4 @@ TEMPERATURE=0.6
 - Add your prompts to the [prompts.csv](prompts.csv) file
 - Run `pip install -r requirements.txt`
 - Run `python .\main.py`
-- The [prompts.csv](prompts.csv) file will have been filled in with the responses
+- The [responses.csv](responses.csv) file will have been filled in with the responses

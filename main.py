@@ -2,6 +2,7 @@ import openai
 from os import getenv
 from dotenv.main import load_dotenv
 import pandas
+import time
 
 load_dotenv()
 
@@ -19,11 +20,23 @@ def get_completion(prompt):
 
     return response.choices[0].message["content"]
 
-def query_prompts(filename):
-    df = pandas.read_csv(filename)
+def query_prompts(prompts_filename, responses_filename):
+    df = pandas.read_csv(prompts_filename)
+    df = df.fillna("")
 
-    df['Response'] = df.apply(lambda row : get_completion(row["Prompt"]), axis = 1)
+    # df['Response'] = df.apply(lambda row : get_completion(row["Prompt"]), axis = 1)
 
-    df.to_csv(filename, index=False)
+    i = 0
+    for index, row in df.iterrows():
+        df.at[i, "Response"] = get_completion(row["Prompt"])
 
-query_prompts("prompts.csv")
+        df.to_csv(responses_filename, index=False)
+
+        i += 1
+        if (i % 3 == 0):
+            time.sleep(60)
+        
+
+    df.to_csv(responses_filename, index=False)
+
+query_prompts("prompts.csv", "responses.csv")
